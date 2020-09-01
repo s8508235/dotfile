@@ -1,0 +1,23 @@
+alias dc=docker-compose
+function cls() {
+    printf "\033c"
+}
+function cease() {
+    PID=$(sudo lsof -t -i:$1)
+    if ps -p $PID &> /dev/null; then
+	    kill -9 $PID
+	    echo "kill $PID for port $1"
+    else
+	    echo "port not using"
+    fi
+}
+function pushNB() {
+    git push -u origin $(git branch --show-current)
+}
+function cpToekn() {
+   cat ~/Documents/{file} | xclip -sel clipboard
+}
+
+export RIPGREP_CONFIG_PATH=~/.ripgreprc
+
+# add [ -f $HOME/.bashrc_addition ] && . $HOME/.bashrc_addition at the end of ~/.bashrc
