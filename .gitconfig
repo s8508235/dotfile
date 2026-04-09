@@ -1,0 +1,51 @@
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    df = diff
+    dfs = diff --stat
+    dfc = diff --cached
+    dfh = diff --histogram
+    dfn = diff --name-status
+    rs = restore
+    rsc = restore --staged
+    last = log -1 HEAD
+    lg = log --graph --decorate --oneline --abbrev-commit
+    cm = commit -m
+    ca = commit --amend
+    cane = commit --amend --no-edit
+    # https://news.ycombinator.com/item?id=47687273
+    who = shortlog -sn --no-merges HEAD
+    churn = log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20
+    who = shortlog -sn --no-merges
+    bugs = log -i -E --grep=\"fix|bug|broken\" --name-only --format='' | sort | uniq -c | sort -nr | head -20
+    pulse = log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
+    firefight = log --oneline --since=\"1 year ago\" | grep -iE 'revert|hotfix|emergency|rollback'
+    audit = "!f() { echo '=== Churn ==='; git churn; echo; echo '=== Contributors ==='; git who; echo; echo '=== Bug hotspots ==='; git bugs; echo; echo '=== Monthly pulse ==='; git pulse; echo; echo '=== Firefighting ==='; git firefight; true; }; f"
+
+# https://jvns.ca/blog/2024/02/16/popular-git-config-options/
+[rebase]
+	autosquash = true
+    autostash  = true
+[push]
+    autoSetupRemote  = true
+[init]
+    defaultBranch = main
+[rerere]
+	enabled = true
+[help]
+    autocorrect = 10
+[branch]
+	sort = -committerdate
+[core]
+    autocrlf = false
+[diff]
+    context = 5
+[push]
+    followtags = true
+[rebase]
+    missingCommitsCheck = error
+    updateRefs = true
+[merge]
+    conflictstyle = zdiff3
